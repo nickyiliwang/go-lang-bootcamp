@@ -13,5 +13,6 @@ func main() {
 	// go is strongly typed
 	var speed int
 
+	// speed will output a default value of 0
 	fmt.Println(speed)
 }
