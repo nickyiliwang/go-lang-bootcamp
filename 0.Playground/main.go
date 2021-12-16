@@ -1,15 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-// avoiding deadlock
 func main() {
-	c := make(chan string, 2)
-	c <- "hello"
-	c <- "world"
-	msg := <-c
-	fmt.Println(msg)
+	out1 := make(chan string)
+	go process("order", out1)
 
-	msg = <-c
-	fmt.Println(msg)
+	for {
+		msg := <-out1
+		fmt.Println(msg)
+	}
+}
+
+func process(item string, out chan string) {
+	for i := 1; i <= 5; i++ {
+		time.Sleep(time.Second / 2)
+		out <- item
+	}
 }
