@@ -7,17 +7,31 @@ import (
 
 func main() {
 	out1 := make(chan string)
-	go process("order", out1)
+	out2 := make(chan string)
+
+	go func() {
+		for {
+			time.Sleep(time.Second / 2)
+			out1 <- "order processed"
+		}
+	}()
+
+	go func() {
+		for {
+			time.Sleep(time.Second)
+			out2 <- "refund processed"
+		}
+	}()
 
 	for {
-		msg := <-out1
-		fmt.Println(msg)
-	}
-}
-
-func process(item string, out chan string) {
-	for i := 1; i <= 5; i++ {
-		time.Sleep(time.Second / 2)
-		out <- item
+		// select is kind of like an switch statement
+		// select helps with checking to see if one process is done before the next
+		// in this case order is processing faster than refunds
+		select {
+		case msg := <-out1:
+			fmt.Println(msg)
+		case msg := <-out2:
+			fmt.Println(msg)
+		}
 	}
 }
