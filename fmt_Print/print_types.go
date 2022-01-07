@@ -8,7 +8,6 @@ func main() {
 	var off bool
 	var brand string
 
-
 	// %T tells it to print the type
 	fmt.Printf("%T\n", speed)
 	fmt.Printf("%T\n", heat)
