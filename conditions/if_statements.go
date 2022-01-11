@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	score := 3
+	score := 5
 	// go does not require parentheses
-	if score > 3 {
+	if score >= 3 {
 		fmt.Printf("Good!")
 	}
 }
