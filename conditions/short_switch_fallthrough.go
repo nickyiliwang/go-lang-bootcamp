@@ -6,8 +6,10 @@ import "fmt"
 // go automatically adds break statements unlike JS
 // fallthrough is rarely used
 func main() {
-	i := 125
-	switch {
+	// we are initiating a variable in the switch statement and need the semi-colon
+	// so we can add the following true value condition, it's there as a default
+	// switch i := 125; true
+	switch i := 125; {
 	case i > 100:
 		fmt.Println("big")
 		fallthrough
